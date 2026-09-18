@@ -66,6 +66,33 @@ body {
   align-items: center;
 }
 
+/* Jeweled glints drift slowly across the map table, like light catching
+   gemstones set into a crown. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(45, 212, 191, 0.6) 1.3px, transparent 1.7px),
+    radial-gradient(circle, rgba(234, 179, 8, 0.5) 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(159, 201, 197, 0.4) 1px, transparent 1.4px);
+  background-size: 260px 240px, 200px 260px, 170px 220px;
+  background-position: 30px 20px, 150px 160px, 70px 200px;
+  animation: gemDrift 32s linear infinite, gemGlint 4.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes gemDrift {
+  from { background-position: 30px 20px, 150px 160px, 70px 200px; }
+  to   { background-position: 30px 260px, 150px 420px, 70px 420px; }
+}
+
+@keyframes gemGlint {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 1; }
+}
+
 body::after {
   content: '';
   position: fixed;
