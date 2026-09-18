@@ -67,7 +67,10 @@ body {
 }
 
 /* Jeweled glints drift slowly across the map table, like light catching
-   gemstones set into a crown. */
+   gemstones set into a crown. Kept as texture, but the board covers
+   almost the whole viewport so these tiny sparse dots barely register
+   as motion on their own; the bold drifting glow below does the actual
+   visible work. */
 body::before {
   content: '';
   position: fixed;
@@ -91,6 +94,26 @@ body::before {
 @keyframes gemGlint {
   0%, 100% { opacity: 0.45; }
   50%       { opacity: 1; }
+}
+
+/* A bold teal glint sweeps slowly across the map table, sized to
+   actually show in the thin margins the board leaves visible. Uses
+   #root (not body) since body's own ::before/::after are already
+   spoken for above. */
+#root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 280px at 50% 50%, rgba(20, 184, 166, 0.22) 0%, transparent 70%);
+  animation: realmSweep 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes realmSweep {
+  0%   { transform: translate(-40vw, -30vh); }
+  50%  { transform: translate(35vw, 30vh); }
+  100% { transform: translate(-40vw, -30vh); }
 }
 
 body::after {
