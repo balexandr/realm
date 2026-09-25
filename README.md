@@ -1,7 +1,7 @@
-# Realm — Daily Region Puzzle
+# Realm: Daily Region Puzzle
 
 A daily puzzle game where you place one crown in every row, column, and
-colored region — no two crowns may touch, not even diagonally.
+colored region. No two crowns may touch, not even diagonally.
 
 Part of the [NoodleGames](https://noodlegames.co) family alongside **Pathways** and **Sprout**.
 
@@ -10,11 +10,11 @@ Part of the [NoodleGames](https://noodlegames.co) family alongside **Pathways** 
 ## How to play
 
 Tap a cell to cycle it through `empty → ✕ → 👑 → empty`. The ✕ is a pure
-scratch mark for your own deduction — it has no effect on solving.
+scratch mark for your own deduction; it has no effect on solving.
 
 - Every row, every column, and every colored region gets exactly **one** crown.
 - Two crowns can never sit diagonally next to each other.
-- No submit button — the puzzle locks in the instant every rule holds at once.
+- No submit button: the puzzle locks in the instant every rule holds at once.
 - Free retry forever. There's no fail state and no penalty for backtracking;
   the whole game is deduction, not risk management.
 - Resets daily at **midnight ET**.
@@ -23,7 +23,7 @@ scratch mark for your own deduction — it has no effect on solving.
 
 ## Scoring
 
-Solve time only — no par or guess penalty, since ✕ marks are free scratch
+Solve time only, no par or guess penalty, since ✕ marks are free scratch
 notes rather than guesses. The timer starts on your first tap, not on page load.
 
 ---
@@ -49,7 +49,7 @@ stored in `src/data/puzzles.json` keyed by date. Each entry has a grid size,
 colored region layout, and the unique crown solution.
 
 Puzzles are generated, not hand-written: `scripts/generate-puzzles.mjs`
-uses an active carving algorithm — find an alternate valid crown placement,
+uses an active carving algorithm: find an alternate valid crown placement,
 hand one of its cells to a region another alternate solution depends on
 (breaking that alternate), repeat until a solver proves the puzzle has
 exactly one solution. A smoothing pass then merges stray disconnected
