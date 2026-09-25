@@ -54,6 +54,3 @@ hand one of its cells to a region another alternate solution depends on
 (breaking that alternate), repeat until a solver proves the puzzle has
 exactly one solution. A smoothing pass then merges stray disconnected
 region fragments into neighbors, re-verifying uniqueness after every merge.
-
-See [GAME_DESIGN.md](./GAME_DESIGN.md) for the full design history —
-puzzle generation approach and why the genre was picked.
