@@ -20,6 +20,7 @@ export default function App() {
     initialized,
     cells,
     cycleCell,
+    resetBoard,
     gameStatus,
     elapsedSeconds,
     timerRunning,
@@ -154,6 +155,19 @@ export default function App() {
             <span className={styles.crownsLabel}>Crowns</span>
             <span className={styles.crownsValue}>{crownsPlaced}/{puzzle.size}</span>
           </div>
+          <button
+            type="button"
+            className={styles.resetButton}
+            onClick={resetBoard}
+            disabled={gameStatus !== 'playing' || Object.keys(cells).length === 0}
+            aria-label="Reset board"
+          >
+            <svg className={styles.resetIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20 11A8 8 0 1 0 18.5 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M20 5v6h-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Reset
+          </button>
         </div>
 
         <RealmGrid

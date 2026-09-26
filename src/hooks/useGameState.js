@@ -149,6 +149,14 @@ export function useGameState() {
     });
   }, [gameStatus]);
 
+  // Clears every placed mark (✕ and 👑) back to empty without touching the
+  // puzzle, score, or clock — same "free retry forever, no penalty" ethos
+  // as the cell-cycling itself. Only meaningful mid-solve.
+  const resetBoard = useCallback(() => {
+    if (gameStatus !== 'playing') return;
+    setCellsState({});
+  }, [gameStatus]);
+
   const generateShareText = useCallback(() => {
     if (!puzzle || gameStatus !== 'won') return '';
     const mm = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
@@ -163,6 +171,7 @@ export function useGameState() {
     initialized,
     cells,
     cycleCell,
+    resetBoard,
     gameStatus,
     elapsedSeconds,
     timerRunning,
