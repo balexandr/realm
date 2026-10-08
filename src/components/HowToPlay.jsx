@@ -1,7 +1,8 @@
+import { IconDrag, IconTarget, IconNoEntry, IconCastle, IconClose, IconCrown } from './Icons';
 import styles from './HowToPlay.module.css';
 
 // A tiny 4x4 solved example: 4 regions, one crown per row/column/region,
-// none touching diagonally — purely illustrative, not pulled from a real
+// none touching diagonally. Purely illustrative, not pulled from a real
 // generated puzzle.
 const REGION_COLORS = ['#f43f5e', '#3b82f6', '#22c55e', '#eab308'];
 const EXAMPLE_REGIONS = [
@@ -18,37 +19,40 @@ export default function HowToPlay({ onClose }) {
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <h2 className={styles.title}>How to Play</h2>
         <p className={styles.intro}>
-          Place one crown in every row, column, and colored region — no two
+          Place one crown in every row, column, and colored region, no two
           crowns may touch, not even diagonally.
         </p>
 
         <div className={styles.steps}>
           <div className={styles.step}>
-            <span className={styles.stepIcon}>👆</span>
+            <span className={styles.stepIcon}><IconDrag /></span>
             <div>
               <p className={styles.stepTitle}>Tap a cell</p>
-              <p className={styles.stepDesc}>Cycles empty → ✕ → 👑 → empty. Use ✕ as your own scratch mark to rule cells out — it has no effect on solving.</p>
+              <p className={styles.stepDesc}>
+                Cycles empty, <IconClose size={11} />, <IconCrown size={13} />, empty. Use <IconClose size={11} /> as
+                your own scratch mark to rule cells out, it has no effect on solving.
+              </p>
             </div>
           </div>
           <div className={styles.step}>
-            <span className={styles.stepIcon}>🎯</span>
+            <span className={styles.stepIcon}><IconTarget /></span>
             <div>
               <p className={styles.stepTitle}>One crown per row, column, region</p>
-              <p className={styles.stepDesc}>Every row, every column, and every colored region gets exactly one crown — never two.</p>
+              <p className={styles.stepDesc}>Every row, every column, and every colored region gets exactly one crown, never two.</p>
             </div>
           </div>
           <div className={styles.step}>
-            <span className={styles.stepIcon}>🚫</span>
+            <span className={styles.stepIcon}><IconNoEntry /></span>
             <div>
               <p className={styles.stepTitle}>No touching</p>
               <p className={styles.stepDesc}>Two crowns can never sit diagonally next to each other. (They already can't share a row or column.)</p>
             </div>
           </div>
           <div className={styles.step}>
-            <span className={styles.stepIcon}>🏰</span>
+            <span className={styles.stepIcon}><IconCastle /></span>
             <div>
               <p className={styles.stepTitle}>It solves itself</p>
-              <p className={styles.stepDesc}>The puzzle locks in the instant every rule is satisfied at once — no submit button, retry as much as you like.</p>
+              <p className={styles.stepDesc}>The puzzle locks in the instant every rule is satisfied at once, no submit button, retry as much as you like.</p>
             </div>
           </div>
         </div>
@@ -67,14 +71,14 @@ export default function HowToPlay({ onClose }) {
                       className={styles.exCell}
                       style={{ background: `${REGION_COLORS[region]}33` }}
                     >
-                      {hasCrown ? '👑' : ''}
+                      {hasCrown ? <IconCrown size={16} /> : ''}
                     </span>
                   );
                 })}
               </div>
             ))}
           </div>
-          <p className={styles.exampleCaption}>One crown per color, per row, per column — none touching corners.</p>
+          <p className={styles.exampleCaption}>One crown per color, per row, per column, none touching corners.</p>
         </div>
 
         <button className={styles.playButton} onClick={onClose}>

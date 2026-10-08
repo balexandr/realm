@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
+import { IconCrown, IconClose } from './Icons';
 import styles from './RealmGrid.module.css';
 
-// Same hue set Pathways established for colored regions on a dark UI —
+// Same hue set Pathways established for colored regions on a dark UI,
 // reused deliberately, see GAME_DESIGN.md's "Shared Noodle Pattern
 // Compliance" section.
 const REGION_COLORS = [
@@ -40,8 +41,8 @@ export default function RealmGrid({ puzzle, cells, onCycleCell, gameStatus }) {
           data-col={c}
           aria-label={label}
         >
-          {state === 2 && <span className={styles.crown}>👑</span>}
-          {state === 1 && <span className={styles.mark}>✕</span>}
+          {state === 2 && <span className={styles.crown}><IconCrown size={20} /></span>}
+          {state === 1 && <span className={styles.mark}><IconClose size={14} /></span>}
         </button>
       );
     }

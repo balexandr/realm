@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { IconClose, IconCheckmark, IconShare, IconTrophy, IconCrown, IconCastle, IconMap } from './Icons';
 import styles from './WinScreen.module.css';
 
 function getTimeToMidnight() {
@@ -20,14 +21,14 @@ function formatTime(s) {
   return `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
 }
 
-// Flat thresholds for a v1 — grid size varies 5x5 to 9x9 across the week so
+// Flat thresholds for a v1, grid size varies 5x5 to 9x9 across the week so
 // a fixed cutoff is a rougher fit on harder days. Tune after playtesting,
 // same as everything else in GAME_DESIGN.md's open questions.
 function getRating(seconds) {
-  if (seconds < 60) return { emoji: '🏆', label: 'Lightning Rule' };
-  if (seconds < 150) return { emoji: '👑', label: 'Crowned' };
-  if (seconds < 300) return { emoji: '🏰', label: 'Claimed' };
-  return { emoji: '🗺️', label: 'Charted' };
+  if (seconds < 60) return { Icon: IconTrophy, label: 'Lightning Rule' };
+  if (seconds < 150) return { Icon: IconCrown, label: 'Crowned' };
+  if (seconds < 300) return { Icon: IconCastle, label: 'Claimed' };
+  return { Icon: IconMap, label: 'Charted' };
 }
 
 export default function WinScreen({ puzzle, puzzleNumber, elapsedSeconds, generateShareText, stats, winPct, onDismiss }) {
@@ -83,10 +84,10 @@ export default function WinScreen({ puzzle, puzzleNumber, elapsedSeconds, genera
         </div>
 
         <div className={styles.resultHeader}>
-          <button className={styles.dismissBtn} onClick={onDismiss} aria-label="Close">✕</button>
-          <span className={styles.ratingEmoji}>{rating.emoji}</span>
+          <button className={styles.dismissBtn} onClick={onDismiss} aria-label="Close"><IconClose /></button>
+          <span className={styles.ratingEmoji}><rating.Icon size={40} /></span>
           <h2 className={styles.title}>{rating.label}!</h2>
-          <p className={styles.subtitle}>Realm #{puzzleNumber} — claimed</p>
+          <p className={styles.subtitle}>Realm #{puzzleNumber}, claimed</p>
         </div>
 
         <div className={styles.metricsRow}>
@@ -133,7 +134,7 @@ export default function WinScreen({ puzzle, puzzleNumber, elapsedSeconds, genera
           className={`${styles.shareButton} ${copied ? styles.copied : ''}`}
           onClick={handleShare}
         >
-          {copied ? '✓ Copied to clipboard' : '⬆ Share your result'}
+          {copied ? <><IconCheckmark /> Copied to clipboard</> : <><IconShare /> Share your result</>}
         </button>
 
         <div className={styles.countdown}>

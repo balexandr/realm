@@ -58,14 +58,23 @@
 .cell:disabled { cursor: default; }
 
 .mark {
-  font-size: min(4.5vw, 18px);
-  font-weight: 700;
+  display: flex;
   color: rgba(255, 255, 255, 0.32);
 }
 
+.mark svg {
+  width: min(4.5vw, 18px);
+  height: min(4.5vw, 18px);
+}
+
 .crown {
-  font-size: min(6vw, 22px);
+  display: flex;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.crown svg {
+  width: min(6vw, 22px);
+  height: min(6vw, 22px);
 }
 
 .crowned {
