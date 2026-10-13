@@ -96,6 +96,16 @@ export function IconTrophy({ size = 40, ...props }) {
   );
 }
 
+export function IconLeaderboard({ size = 20, ...props }) {
+  return (
+    <svg width={size} height={size} {...base(props)}>
+      <rect x="4" y="13" width="4" height="7" rx="1" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <rect x="10" y="8" width="4" height="12" rx="1" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <rect x="16" y="4" width="4" height="16" rx="1" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 // The actual game piece and logo mark: GameLogo.jsx's exact crown
 // paths, same two-tone teal fill, so the piece you place on the board
 // matches the brand mark pixel-for-pixel in spirit.
