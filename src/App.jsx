@@ -11,6 +11,7 @@ import { GameLogo } from './components/GameLogo';
 import { NoodleLogoIcon } from './components/NoodleLogo';
 import { recordTodayShare, getCompletedTodayCount, buildShareAllText, TOTAL_GAMES } from './utils/shareAll';
 import { toLeaderboardScore } from './utils/leaderboardScore';
+import { fetchTodayBoard, findMyRow, wouldQualify } from './utils/leaderboard';
 import { IconCheckmark, IconShare, IconCastle, IconClose, IconCrown, IconLeaderboard } from './components/Icons';
 
 const HOW_TO_PLAY_KEY = 'realm-how-to-play-seen';
@@ -56,6 +57,25 @@ export default function App() {
       recordGame(dateKey, elapsedSeconds);
       recordTodayShare('realm', dateKey, generateShareText());
     }
+  }, [gameStatus]);
+
+  // Auto-opens the leaderboard (initials prompt included) a beat after
+  // a qualifying win, instead of making the player click "today's
+  // leaderboard" to find out they made the cut.
+  useEffect(() => {
+    if (gameStatus !== 'won') return;
+    const t = setTimeout(() => {
+      const pending = toLeaderboardScore(elapsedSeconds);
+      fetchTodayBoard('realm', dateKey).then((board) => {
+        if (!board.config) return;
+        if (findMyRow('realm', board.rows)) return;
+        if (wouldQualify(pending.score, board.rows, board.config)) {
+          setShowLeaderboard(true);
+        }
+      });
+    }, 2000);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameStatus]);
 
   useEffect(() => {
